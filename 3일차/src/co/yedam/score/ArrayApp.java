@@ -15,7 +15,8 @@ public class ArrayApp {
 	// 배열 출력
 	void print() {
 		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
+			System.out.print(arr[i]+
+					" ");
 		}
 	}
 	// 합계
@@ -35,8 +36,8 @@ public class ArrayApp {
 			if (arr[i] > max) {
 				max = arr[i];
 			}
-			System.out.println("최대값" + max);
 		}
+		System.out.println("최대값" + max);
 	}
 
 	public static void main(String[] args) {
