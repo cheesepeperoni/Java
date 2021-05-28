@@ -1,5 +1,6 @@
 package co.yedam.score;
 
+//작성자 :백명진 
 public class ArrayApp {
 	
 	int[] arr = new int[10];
