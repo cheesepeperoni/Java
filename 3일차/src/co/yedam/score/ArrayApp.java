@@ -16,8 +16,7 @@ public class ArrayApp {
 	// 배열 출력
 	void print() {
 		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i]+
-					" ");
+			System.out.print(arr[i]+" ");
 		}
 	}
 	// 합계

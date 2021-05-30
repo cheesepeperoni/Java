@@ -23,7 +23,7 @@ public class ScoreArr2App {
 	int stdTotal(int no) {
 		int result = 0;
 		for(int i=0 ; i<arr[no].length; i++) {
-			result += arr[no][i];//+ arr[no][1] + arr[no][1] +arr[no][2];
+			result += arr[no][i];//+ arr[no][0] + arr[no][1] +arr[no][2];
 		}
 		return result;
 	}
