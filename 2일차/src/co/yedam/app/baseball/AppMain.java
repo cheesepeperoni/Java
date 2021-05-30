@@ -5,7 +5,7 @@ public class AppMain {
 	public static void main(String[] args) {
 		
 		
-		BaseballApp app = new BaseBallApp() ;
+		BaseballApp app = new BaseBallApp();
 		app.start();
 		
 	}
