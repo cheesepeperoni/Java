@@ -29,7 +29,6 @@ public class CalcGame {
 		//def add(a,b):
 		//return a+b
 	}
-	
 	//두 수의 몫을 계산 5/2 2
 	int share() {
 		return (int)a/(int)b;

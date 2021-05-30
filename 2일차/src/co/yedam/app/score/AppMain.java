@@ -6,8 +6,8 @@ public class AppMain {
 		ScoreApp score = new ScoreApp();
 		score.input();
 
-		System.out.println(score.getSum() + ":" +
-							score.getAvg() + ":" + 
+		System.out.println("합계:"+ score.getSum() + "  평균:"+
+							score.getAvg() + "  상,중,하:" + 
 							score.getGrade());
 		System.out.println("합격여부:" + (score.isPass()?"합격":"불합격"));
 

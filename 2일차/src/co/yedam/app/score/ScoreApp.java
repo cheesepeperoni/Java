@@ -1,7 +1,6 @@
 package co.yedam.app.score;
 
 import java.util.Scanner;
-
 /*
  * 성적처리 프로그램
  * 국어,영어,수학 입력
@@ -20,16 +19,16 @@ public class ScoreApp {
 	//성적 입력
 	void input() {
 		//국어 , 영어 , 수학 입력
-		System.out.println("국어 성적을 입력하세요:");
+		System.out.print("국어 성적을 입력하세요: ");
 		kor = scanner.nextInt();
-		System.out.println("영어 성적을 입력하세요:");
+		System.out.print("영어 성적을 입력하세요: ");
 		eng = scanner.nextInt();
-		System.out.println("수학 성적을 입력하세요:");
+		System.out.print("수학 성적을 입력하세요: ");
 		mat = scanner.nextInt();
-		
 		
 		sum = kor + eng + mat;
 		avg = (float)sum/3;
+		
 		
 	}
 	//합계 계산
@@ -41,6 +40,7 @@ public class ScoreApp {
 	
 	float getAvg() {
 		return avg;
+		
 	}
 	boolean isPass()	{			
 		// 평균이 60 이상 true
