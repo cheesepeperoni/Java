@@ -59,6 +59,17 @@ public class Robot {
 
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Robot r2 = ((Robot) obj);
+		return r2.arm == this.arm && r2.leg == this.leg;
+	}
+
+	@Override
+	public String toString() {
+		return "arm:" + arm + "  leg:" + leg;
+	}
+
 	// getter : 필드값을 조회(변경은 불가)
 
 }

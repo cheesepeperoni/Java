@@ -21,4 +21,5 @@ public class Bird extends Superman{
 	public void layEggs() {
 		System.out.println("알!");
 	}
+	
 }
