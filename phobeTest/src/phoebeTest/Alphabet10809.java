@@ -1,7 +1,6 @@
 package phoebeTest;
 
 import java.util.Scanner;
-
 public class Alphabet10809 {
 
 	public static void main(String[] args) {
