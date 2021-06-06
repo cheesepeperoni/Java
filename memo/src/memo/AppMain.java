@@ -1,3 +1,4 @@
+package memo;
 import memo.view.MemoCliApp;
 
 public class AppMain {
