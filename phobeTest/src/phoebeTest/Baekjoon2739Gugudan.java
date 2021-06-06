@@ -1,4 +1,4 @@
-package phobeTest;
+package phoebeTest;
 
 import java.util.Scanner;
 

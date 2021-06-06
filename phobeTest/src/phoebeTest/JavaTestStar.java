@@ -1,4 +1,4 @@
-package phobeTest;
+package phoebeTest;
 
 public class JavaTestStar {
 
