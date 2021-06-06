@@ -20,10 +20,6 @@ public class Friend {
 		System.out.printf("친구 : %20s %20s %20s\n", gubun, name, tel);
 	}
 
-	@Override
-	public String toString() {
-		return "Friend [gubun=" + gubun + ", name=" + name + ", tel=" + tel + "]";
-	}
 
 	public String getGubun() {
 		return gubun;
@@ -49,4 +45,11 @@ public class Friend {
 		this.tel = tel;
 	}
 
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Friend [gubun=" + gubun + ", name=" + name + ", tel=" + tel + "]";
+	}
 }

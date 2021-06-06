@@ -1,7 +1,7 @@
 package co.friend.access;
 
 
-import java.io.BufferedWriter; 
+import java.io.BufferedWriter;  
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class FriendList implements FriendAccess {
 	@Override
 	public Friend selectOne(String name) {
 		for (Friend f : friends) {
-			if (f.getName().equals(name)) { // contains
+			if (f.getName().equals(name)) { 
 				return f;
 			}
 		}

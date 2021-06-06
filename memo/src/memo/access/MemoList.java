@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import co.friend.model.Friend;
 import memo.model.Memo;
 
 public class MemoList implements MemoAccess {
@@ -18,22 +17,23 @@ public class MemoList implements MemoAccess {
 	public void open() {
 		try {
 			Scanner scanner = new Scanner(new File(path));
-			while(true) {
-				if(! scanner.hasNext())
+			while (true) {
+				if (!scanner.hasNext())
 					break;
-				String str = scanner.next();
+				String str = scanner.nextLine();
 				String[] arr = str.split(",");
-				friends.add(new Friend(arr[0], arr[1]));
-				
-			}scanner.close();
-		}catch(Exception e) {
+				memos.add(new Memo(arr[0],arr[1]));
+
+			}
+			scanner.close();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	// 메모 리스트
 	public MemoList() {
-		memos = new MemoList<Memo>();
+		memos = new ArrayList<Memo>();
 		open();
 
 	}
@@ -48,44 +48,54 @@ public class MemoList implements MemoAccess {
 		try {
 			BufferedWriter cn = new BufferedWriter(new FileWriter(path));
 			for(Memo o: memos) {
-				cn.write(String.format("%s, %s\n",o.getDate(),o.getContent()))
+				cn.write(String.format("%s,%s\n",o.getDate(),o.getContent()));
 			}
 			cn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	//추가
+
+	// 메모 등록
 	public void update(Memo memo) {
-		for (memo o : memos) {
-			if (o.getdate().equals(date.getContent)) {
-				memos.remove(o);
+		for (Memo o : memos) {
+			if (o.getDate().equals(memo.getDate())) {
+				o.setContent(memo.getContent());
 				save();
 			}
 		}
 	}
-
-	public void delete(String date) {
+	// 메모 삭제
+	public void delete(String m) {
 		for (Memo o : memos) {
-			if(o.getDate().equals(date)) {
+			if (o.getDate().equals(m)) {
 				memos.remove(o);
 				save();
 				break;
 			}
 		}
 	}
-	
-	public ArrayList<Memo> selectAll(){
+
+	public ArrayList<Memo> selectAll() {
 		return memos;
-		
+
 	}
-	
-	public Memo MemoNal(String date) {
-		for(Memo o: memos) {
-			if(o.getDate().equals(date)) {
+
+	public Memo selectNal(String m) {
+		for (Memo o : memos) {
+			if (o.getDate().equals(m)) {
 				return o;
 			}
-		}return null;
+		}
+		return null;
 	}
-	
+
+	public Memo findContent(String n) {
+		for (Memo o : memos) {
+			if (o.getContent().contains(n)) { // contains
+				return o;
+			}
+		}
+		return null;
+	}
 }

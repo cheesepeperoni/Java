@@ -1,6 +1,6 @@
 package co.friend.Util;
 
-import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat ;
 import java.util.Scanner;
 import co.friend.model.Friend;
 

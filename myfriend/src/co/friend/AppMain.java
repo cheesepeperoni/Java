@@ -1,6 +1,6 @@
 package co.friend;
 
-import co.friend.view.FriendCliApp;
+import co.friend.view.FriendCliApp; 
 import co.friend.view.FriendGuiApp;
 
 public class AppMain {

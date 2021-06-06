@@ -1,8 +1,8 @@
 package co.memo.util;
 
-import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat ;
 import java.util.Scanner;
-import co.friend.model.Friend;
+import memo.model.Memo;
 
 public class ScannerUtil {
 	static Scanner scanner = new Scanner(System.in);
@@ -58,9 +58,9 @@ public class ScannerUtil {
 	}
 	//Friend 입력
 	public static Memo readMemo() {
-		System.out.println("구분, 이름 , 전화번호>");
+		System.out.println("날짜와 메모하실 내용을 입력하세요 _ (date:contents)");
 		String result = scanner.next();
-		String[] arr = result.split(",");
+		String[] arr = result.split(":");
 		Memo memo = new Memo();			//혹은 new Friend(arr[0],arr[1],arr[2]);
 		memo.setDate(arr[0]);
 		memo.setContent(arr[1]);

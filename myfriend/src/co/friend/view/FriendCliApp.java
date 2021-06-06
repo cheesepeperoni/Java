@@ -1,6 +1,6 @@
 package co.friend.view;
 
-import java.util.List; 
+import java.util.List;  
 
 import co.friend.Util.ScannerUtil;
 import co.friend.access.FriendList;

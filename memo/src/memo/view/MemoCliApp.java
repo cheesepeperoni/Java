@@ -19,19 +19,23 @@ public class MemoCliApp {
 			case 2: update(); break;
 			case 3: delete(); break;
 			case 4: selectAll(); break;
-			case 5: findContent(); break;
+			case 5: selectNal(); break;
+			case 6: findContent(); break;
 			
 			}
 		}while(menunum != 0);
+		System.out.println("종료되었습니다");
 	}
 	
-	private void findDate() {
-		
+	private void selectNal() {
+		String m = ScannerUtil.readStr("날짜를 검색하세요");
+		Memo memo = memoList.selectNal(m);
+		System.out.println(memo.getContent());
 	}
 	
 	private void findContent() {
-		String con = ScannerUtil.readStr();
-		Memo memo = memoList.findContent(con);
+		String n = ScannerUtil.readStr("내용을 검색하세요");
+		Memo memo = memoList.findContent(n);
 		System.out.println(memo);
 	}
 	
@@ -44,15 +48,13 @@ public class MemoCliApp {
 	
 	private void update() {
 		Memo memo = new Memo();
-		memo.setDate(ScannerUtil.readStr());
-		memo.setContent(ScannerUtil.readStr());
+		memo.setDate(ScannerUtil.readStr("날짜를 입력하세요"));
+		memo.setContent(ScannerUtil.readStr("수정하실 내용을 입력하세요"));
 		memoList.update(memo);
 	}
 	private void delete() {
-		String date = ScannerUtil.readStr();
-		String content =ScannerUtil.readStr();
-		memoList.delate(date);
-		memoList.delate(content);
+		String m = ScannerUtil.readStr("삭제하실 날짜를 입력하세요");
+		memoList.delete(m);
 		
 	}
 	private void selectAll() {
