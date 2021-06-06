@@ -1,6 +1,6 @@
-package test;
+package co.micol;
 
-public class Bird extends Superman{
+public class Bird extends Animal{
 	
 	public void run() {
 		System.out.println("달리다");

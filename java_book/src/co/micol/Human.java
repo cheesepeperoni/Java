@@ -1,4 +1,4 @@
-package test;
+package co.micol;
 
 public class Human extends Animal{
 

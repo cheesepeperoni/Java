@@ -11,16 +11,18 @@ import java.util.Scanner;
 class Memo {
 	String title; // 필드 = 데이터
 	String content;
+
 	public Memo(String title, String content) {
 		super();
 		this.title = title;
 		this.content = content;
 	}
+
 	@Override
 	public String toString() {
 		return "Memo [title=" + title + ", content=" + content + "]";
 	}
-		
+
 }
 
 public class ListTest {
@@ -30,7 +32,7 @@ public class ListTest {
 	public void selectAll() {
 		for (int i = 0; i < list.size(); i++) {
 			Memo memo = list.get(i);
-			System.out.println(memo.title + "\t" + memo.content);
+			System.out.println(memo.title + " " + memo.content);
 		}
 
 	}
@@ -55,36 +57,34 @@ public class ListTest {
 		}
 
 	}
+
 	// 등록
 	public void insert() {
-		//키보드로 입력받아서 메모를 리스트에 추가
-		Scanner scanner = new Scanner();
-		
-		Memo memo = new Memo();
-		memo.title =   
-		memo.content=
-		list.add(memo);
+		// 키보드로 입력받아서 메모를 리스트에 추가
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Title, Memo >");
+		String result = scanner.next();
+		String[] arr = result.split(",");
+		Memo mem = new Memo(arr[0], arr[1]);
 
+		list.add(mem);
 	}
 
 	public static void main(String[] args) {
 		ListTest listTest = new ListTest();
-		listTest.list.add(new Memo("자바 공부","열공합시다"));
-		listTest.list.add(new Memo("자바 시험","월요일에"));
-		listTest.list.add(new Memo("자바 프로젝트","멋지게"));
-		
-		//리스트에 두번 넣고
+		listTest.list.add(new Memo("자바 공부", "열공합시다"));
+		listTest.list.add(new Memo("자바 시험", "월요일에"));
+		listTest.list.add(new Memo("자바 프로젝트", "파이링"));
+
+		// 리스트에 두번 넣고
 		listTest.insert();
-		listTest.insert();
-		
-		//리스트에 두번 넣은거 조회하고
+
+		// 리스트에 두번 넣은거 조회하고
 		listTest.selectAll();
-	
-		
-		//listTest.selectAll();
-		//listTest.findTitle("자바 공부");
-		listTest.findContent("월요일");
-		
-		
+
+		// listTest.selectAll();
+		// listTest.findTitle("자바 공부");
+		//listTest.findContent("월요일");
+
 	}
 }

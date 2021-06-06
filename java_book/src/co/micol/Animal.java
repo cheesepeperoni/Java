@@ -1,4 +1,4 @@
-package test;
+package co.micol;
 
 public abstract class Animal {
  

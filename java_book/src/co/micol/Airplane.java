@@ -1,6 +1,6 @@
-package test;
+package co.micol;
 
-public class Airplane extends Flyer {
+public class Airplane  {
 	
 	public void takeOff() {
 		System.out.println("비행 이륙");

@@ -1,4 +1,4 @@
-package test;
+package co.micol;
 
 //다중 상속 안됨
 public class Superman extends Human implements Flyer {

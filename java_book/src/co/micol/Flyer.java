@@ -1,4 +1,4 @@
-package test;
+package co.micol;
 
 //인터페이스
 //1. 다중상속
