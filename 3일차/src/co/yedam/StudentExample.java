@@ -6,7 +6,7 @@ public class StudentExample {
 		//2. 객체 생성 = 인스턴스
 		StudentApp app =new StudentApp();
 		Student student = app.createStudent();
-		studnet.print();
+		student.print();
 	}
 
 }
