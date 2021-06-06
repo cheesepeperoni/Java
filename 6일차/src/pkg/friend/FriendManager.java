@@ -5,7 +5,7 @@ import java.util.List;
 import pkg.Friend;
 
 // 클래스 타입 여러개 있으면 public 은 하나만 됨
-public class FriendManager implements FriendAccess {
+public class FriendManger implements FriendAccess {
 	Friend[] friends = new Friend[5];
 
 	public FriendManager() {
