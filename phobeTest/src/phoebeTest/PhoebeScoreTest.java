@@ -9,7 +9,8 @@ public class PhoebeScoreTest {
 		int[] score = new int[5]; // 점수를 담을 배열
 		int sum = 0, max = 0, min = 100; // 합계,최대,최소
 		double avg; // 평균
-
+ 
+		
 		sub[0] = "국어";
 		sub[1] = "수학";
 		sub[2] = "영어";
