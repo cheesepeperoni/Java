@@ -76,10 +76,9 @@ public class ListTest {
 		listTest.list.add(new Memo("자바 시험", "월요일에"));
 		listTest.list.add(new Memo("자바 프로젝트", "파이링"));
 
-		// 리스트에 두번 넣고
+		
 		listTest.insert();
 
-		// 리스트에 두번 넣은거 조회하고
 		listTest.selectAll();
 
 		// listTest.selectAll();
