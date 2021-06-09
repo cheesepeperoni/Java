@@ -13,7 +13,7 @@ public class FriendList implements FriendAccess {
 	ArrayList<Friend> friends;
 
 	String path = "d:/temp/friend.txt";
-	
+	 
 	//오픈
 	public void open() {
 		try {

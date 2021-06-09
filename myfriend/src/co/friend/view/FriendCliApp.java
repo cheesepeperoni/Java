@@ -1,38 +1,43 @@
 package co.friend.view;
 
-import java.util.List;  
+import java.util.List;
 
 import co.friend.Util.ScannerUtil;
-import co.friend.access.FriendList;
+import co.friend.access.FriendDAO;
 import co.friend.model.Friend;
 
 public class FriendCliApp {
-	FriendList friendList = new FriendList();
+//	FriendList friendList = new FriendList();
+	FriendDAO friendList = new FriendDAO();
 
 	public void start() {
 		int menunum;
 		do {
 			menuTitle();
 			menunum = ScannerUtil.readInt("입력");
-			switch(menunum) {
-			case 1: insert(); break;
-			case 2: update(); break;
-			case 3: delete(); break;
-			case 4: selectAll(); break;
-			case 5: findName(); break;
-			case 6: findTel(); break;
-			
+			switch (menunum) {
+			case 1:insert();break;
+			case 2:update();break;
+			case 3:delete();break;
+			case 4:selectAll();break;
+			case 5:findName();break;
+			case 6:findTel();break;
+ 
 			}
-		}while(menunum !=0);
+		} while (menunum != 0);
+		System.out.println("종료되었습니다");
 	}
 
 	private void findTel() {
+		System.out.println("전화번로 검색>");
 		String tel = ScannerUtil.readStr();
 		Friend friend = friendList.findTel(tel);
 		System.out.println(friend);
-		
+
 	}
+
 	private void findName() {
+		System.out.println("찾을이름>");
 		String name = ScannerUtil.readStr();
 		Friend friend = friendList.selectOne(name);
 		System.out.println(friend);
@@ -46,18 +51,20 @@ public class FriendCliApp {
 
 	private void update() {
 		Friend friend = new Friend();
+		System.out.print("이름:");
 		friend.setName(ScannerUtil.readStr());
+		System.out.print("전화번호:");
 		friend.setTel(ScannerUtil.readStr());
 		friendList.update(friend);
 
 	}
 
 	private void delete() {
+		System.out.println("삭제할 이름>");
 		String name = ScannerUtil.readStr();
 		friendList.delete(name);
 
 	}
-
 
 	private void selectAll() {
 		List<Friend> list = friendList.selectAll();
