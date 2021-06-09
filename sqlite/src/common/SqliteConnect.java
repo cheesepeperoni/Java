@@ -41,7 +41,7 @@ public class SqliteConnect {
 		return personList;
 	}
 
-	// 전체리스트(오버로딩)
+	// 전체리스트(오버로딩) 이름으로 조회
 	public static ArrayList<Person> getPersonList(String name) {
 		ArrayList<Person> personList = new ArrayList<>();
 		connect(); // Connetion 객체연결이 없으면 null이 나옴
@@ -90,12 +90,6 @@ public class SqliteConnect {
 			close();
 		}
 		return p;
-	}
-
-	// 한건조회 (name으로 조회 동명이인의 정보까지 나오도록)
-	public static void total(Person p) {
-		connect();
-
 	}
 
 	// 입력기능
@@ -170,12 +164,12 @@ public class SqliteConnect {
 
 	}
 
+	// 연결
 	public static void connect() {
-		String url = "jdbc:sqlite:C:/sqllite/db/sample.db";
+		String url = "jdbc:sqlite:C:/sqlite/db/sample.db";
 		try {
 			conn = DriverManager.getConnection(url);
 			System.out.println("연결성공!");
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -209,7 +203,7 @@ public class SqliteConnect {
 		Scanner scanner = new Scanner(System.in);
 
 		while (true) {
-			System.out.println("1:전체리스트 2:입력 3:수정 4:삭제 5:한건조회 9:종료");
+			System.out.println("1:전체리스트 2:입력 3:수정 4:삭제 5:한건조회 6:이름으로 조회 9:종료");
 			int menu = scanner.nextInt();
 			if (menu == 1) {
 				// 전체리스트 기능
@@ -234,7 +228,7 @@ public class SqliteConnect {
 				insertPerson(searchId, name, age, phone);
 			} else if (menu == 3) {
 				// 수정기
-				System.out.println("수정할 아이디를 입력하세요:");
+				System.out.print("수정할 아이디를 입력하세요:");
 				int searchId = scanner.nextInt();
 				scanner.nextLine();
 				Person p = getPerson(searchId);
@@ -243,11 +237,11 @@ public class SqliteConnect {
 					System.out.println("존재하지 않는 아이디");
 					continue;
 				}
-				System.out.println("변경할 이름:");
+				System.out.print("변경할 이름:");
 				String chanegeName = scanner.nextLine();
-				System.out.println("변경할 나이:");
+				System.out.print("변경할 나이:");
 				String chanegeAge = scanner.nextLine();
-				System.out.println("변경할 폰넘버:");
+				System.out.print("변경할 폰넘버: ");
 				String chanegePhone = scanner.nextLine();
 				if (!chanegeName.equals("")) {
 					p.setName(chanegeName);
@@ -275,13 +269,13 @@ public class SqliteConnect {
 //				updatePerson(updateId, name, age, phone);
 			} else if (menu == 4) {
 				// 삭제기능
-				System.out.println("삭제할 아이디를 입력하세요");
+				System.out.print("삭제할 아이디를 입력하세요: ");
 				int deleteId = scanner.nextInt();
 				deletePerson(deleteId);
 
 			} else if (menu == 5) {
 				// 한건조회
-				System.out.println("조회할 아이디를 입력하세요");
+				System.out.print("조회할 아이디를 입력하세요: ");
 				int searchId = scanner.nextInt();
 				Person p = getPerson(searchId);
 				if (p == null) {
@@ -290,11 +284,13 @@ public class SqliteConnect {
 					System.out.println(p);
 				}
 			} else if (menu == 6) {
-				System.out.println("조회할 이름을 입력하세요");
-			
-				
-				
-				
+				System.out.print("조회할 이름을 입력하세요: ");
+				String searchName = scanner.next();
+				ArrayList<Person> list = getPersonList(searchName);
+				for (Person person : list) {
+					System.out.println(person);
+				}
+
 			} else if (menu == 9) {
 				break;
 			}
