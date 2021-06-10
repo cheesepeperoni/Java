@@ -22,9 +22,9 @@ public class JavaTest {
 		for (int i = 0; i < arr.length; i++) {
 			int a = Integer.parseInt(arr[i].substring(0, 2));
 			if (a < 21) {
-				a += 2000;
+				a += 2000;	 //2001,2004
 			} else {
-				a += 1900;
+				a += 1900;   //1999,1996,1988
 			}
 			if (2021 - a + 1 >= 40) {
 				four+=1;

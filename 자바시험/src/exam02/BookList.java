@@ -14,7 +14,7 @@ public class BookList extends BookAccess {
 	public List<Book> findName(String name) {
 		List<Book> boo = new ArrayList<Book>();
 		for (Book b : books) {
-			if (b.getName().equals(name)) {
+			if (b.getName().contains(name)) {
 				boo.add(b);
 
 			}
