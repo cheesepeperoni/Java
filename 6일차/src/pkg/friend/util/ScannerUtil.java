@@ -2,18 +2,27 @@ package pkg.friend.util;
 
 import java.util.Scanner;
 
+import pkg.Friend;
+
 public class ScannerUtil {
 	static Scanner scanner = new Scanner(System.in);
 
-	public static int readInt() {}
+	public static int readInt() {
+		return 0;
+	}
 
-	public static String readStr() {}
+	public static String readStr() {
+		return null;
+	}
 
-	public static String readDate() {}
+	public static String readDate() {
+		return null;
+	}
 
 	public static Friend readFriend() {
-		String result = scanner.next();
-		
+		return null;
 	}
+		
+	
 
 }

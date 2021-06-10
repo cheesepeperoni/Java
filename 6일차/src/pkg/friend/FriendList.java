@@ -26,7 +26,7 @@ public class FriendList implements FriendAccess {
 	}
 
 	@Override
-	public void delate(String name) {
+	public void delete(String name) {
 		
 		
 	}

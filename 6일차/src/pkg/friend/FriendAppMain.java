@@ -17,7 +17,7 @@ public class FriendAppMain {
 		f = new SchoolFriend("초등학교","김기자","444");
 		list.update(f);
 		//삭제
-		list.delate("김길동");
+		list.delete("김길동");
 		//전체조회
 		list.selectAll();
 

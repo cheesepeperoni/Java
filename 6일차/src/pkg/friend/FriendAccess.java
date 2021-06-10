@@ -20,7 +20,7 @@ public interface FriendAccess {
 	
 	
 	//삭제
-	public void delate(String name);
+	public void delete(String name);
 	
 	
 	

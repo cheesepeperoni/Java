@@ -1,11 +1,9 @@
 package pkg.friend;
 
-import java.util.List;
-
 import pkg.Friend;
 
 // 클래스 타입 여러개 있으면 public 은 하나만 됨
-public class FriendManger implements FriendAccess {
+public class FriendManager implements FriendAccess {
 	Friend[] friends = new Friend[5];
 
 	public FriendManager() {
@@ -29,21 +27,23 @@ public class FriendManger implements FriendAccess {
 	}
 
 	@Override
-	public void delate(Friend friend) {
+	public void delete(String name) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List selectAll() {
+	public void selectAll() {
+		System.out.println("FriendManage");
+	}
+
+	@Override
+	public Friend selectOne(String name) {
 		System.out.println("FriendManage");
 		return null;
 	}
 
-	@Override
-	public Friend selectOne(Object key) {
-		System.out.println("FriendManage");
-		return null;
-	}
+	
+	
 
 }
