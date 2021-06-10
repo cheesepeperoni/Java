@@ -23,7 +23,6 @@ public class MemoList implements MemoAccess {
 				String str = scanner.nextLine();
 				String[] arr = str.split(",");
 				memos.add(new Memo(arr[0],arr[1]));
-
 			}
 			scanner.close();
 		} catch (Exception e) {

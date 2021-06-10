@@ -66,7 +66,7 @@ public class MemoCliApp {
 	}
 	// 메뉴 출력
 	public void menuTitle() {
-		System.out.println("==메모장==");
+		System.out.println("=====memo=====");
 		System.out.println("1 메모등록");
 		System.out.println("2 메모수정");
 		System.out.println("3 메모삭제");

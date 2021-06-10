@@ -59,7 +59,7 @@ public class ScannerUtil {
 	//Friend 입력
 	public static Memo readMemo() {
 		System.out.println("날짜와 메모하실 내용을 입력하세요 _ (date:contents)");
-		String result = scanner.nextLine();
+		String result = scanner.next();
 		String[] arr = result.split(":");
 		Memo memo = new Memo();			//혹은 new Friend(arr[0],arr[1],arr[2]);
 		memo.setDate(arr[0]);
