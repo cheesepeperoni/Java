@@ -23,7 +23,7 @@ public class BoardApp {
 			case 5:selectOne();break;			
 			}
 		} while (menunum != 0);
-		System.out.println("bye~ 종료되었습니다 bye~");
+		System.out.println("《  종료되었습니다  》");
 	}
 	private void insert() {
 		System.out.print("제목>");
@@ -37,14 +37,14 @@ public class BoardApp {
 	}
 	private void update() {
 		Board board = new Board();
-		System.out.println("글 번호를 입력하세요>");
+		System.out.print("글 번호를 입력하세요>");
 		board.setId(scn.next());
-		System.out.println("수정할 내용을 입력하세요>");
+		System.out.print("수정할 내용을 입력하세요>");
 		board.setContent(scn.next());
 		boardList.update(board);
 	}
 	private void delete() {
-		System.out.println("삭제할 글 번호를 입력하세요>");
+		System.out.print("삭제할 글 번호를 입력하세요>");
 		String id = scn.next();
 		boardList.delete(id);
 	}
@@ -61,13 +61,14 @@ public class BoardApp {
 		System.out.println(board);
 	}
 	public void menuTitle() {
-		System.out.println("♥====================♥");
-		System.out.println("1 전체조회");
-		System.out.println("2 글 등록");
-		System.out.println("3 글 수정");
-		System.out.println("4 글 삭제");
-		System.out.println("5 글 번호로 조회");
-		System.out.println("0 종료");
+		System.out.println("♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡");
+		System.out.println("。    1 전체조회       。");
+		System.out.println("。    2 등록          。");
+		System.out.println("。    3 수정          。");
+		System.out.println("。    4 삭제          。");
+		System.out.println("。    5 글번호로 조회   。");
+		System.out.println("。    0 종료          。");
+		System.out.println("♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡");
 		
 
 	}

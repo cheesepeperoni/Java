@@ -30,10 +30,6 @@ public class Board {
 		this.writer = writer;
 	}
 
-//	public void print() {
-//		System.out.printf();
-//	}
-
 	public String getId() {
 		return id;
 	}
