@@ -2,25 +2,16 @@ package co.yedam.member;
 
 import java.util.Scanner;
 
-import co.yedam.score.ArrayApp;
-
 public class MemberServiceExample {
 
 	public static void main(String[] args) {
-		MemberService memberService = new MemberService();
-		memberService.insert("hong","12345","피비",0);
-		memberService.insert("kim","1111","모니카",0);
-		memberService.insert("choi","2222","레이첼",0);
-		//
-		memberService.printList();
-		
-		memberService.printMember(1);
+//		MemberService memberService = new MemberService();
+//		memberService.insert("hong","12345","피비",0);
+//		memberService.insert("kim","1111","모니카",0);
+//		memberService.insert("choi","2222","레이첼",0);
+//	
+//		memberService.printList();
 	
-		System.out.println(memberService.login("kim", "1111"));
-		System.out.println(memberService.login("kim", "1234"));
-
-	
-
 		MemberService member = new MemberService();
 		boolean run = true;
 		Scanner scanner = new Scanner(System.in);
