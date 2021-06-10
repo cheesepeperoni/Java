@@ -1,6 +1,6 @@
 package co.friend.view;
 
-import java.util.List;
+import java.util.List; 
 
 import co.friend.Util.ScannerUtil;
 import co.friend.access.FriendDAO;
@@ -9,12 +9,11 @@ import co.friend.model.Friend;
 public class FriendCliApp {
 //	FriendList friendList = new FriendList();
 	FriendDAO friendList = new FriendDAO();
-
 	public void start() {
 		int menunum;
 		do {
 			menuTitle();
-			menunum = ScannerUtil.readInt("입력");
+			menunum = ScannerUtil.readInt("<번호를 입력하세요>");
 			switch (menunum) {
 			case 1:insert();break;
 			case 2:update();break;

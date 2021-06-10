@@ -1,6 +1,6 @@
 package co.friend.access;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;  
 
 import co.friend.model.Friend;
 /**
