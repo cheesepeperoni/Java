@@ -22,4 +22,6 @@ public class Member {
 		return "Member [name=" + name + ", id=" + id + ", password=" + password + ", age=" + age + "]";
 	}
 
+	
+
 }
