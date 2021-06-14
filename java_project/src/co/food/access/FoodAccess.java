@@ -27,5 +27,5 @@ public interface FoodAccess {
 	public void signUp(String h, String hp);
 	
 	// 직원 회원탈퇴
-	public boolean unSubscribe(String byeId,String byePw);
+	public boolean deleteAccount(String byeId, String byePw);
 }

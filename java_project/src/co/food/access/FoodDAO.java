@@ -18,7 +18,6 @@ public class FoodDAO implements FoodAccess {
 		String url = "jdbc:sqlite:C:/sqlite/db/sample.db";
 		try {
 			conn = DriverManager.getConnection(url);
-			System.out.println("연결성공!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -168,7 +167,6 @@ public class FoodDAO implements FoodAccess {
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				log = true;
-				System.out.println("<< 로그인 되었습니다 >>");
 			} else {
 				log = false;
 			}
@@ -199,20 +197,20 @@ public class FoodDAO implements FoodAccess {
 
 	}
 
+	
 	// 회원탈퇴
 	@Override
-	public boolean unSubscribe(String byeId, String byePw) {
+	public boolean deleteAccount(String byeId, String byePw) {
 		connect();
 		boolean b = false;
-		String sql = "delete from foodUser where id=? and passwd=?";
+		String sql = "delete from foodUser where id =? and passwd=?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, byeId);
-			psmt.setString(2, byePw);
-			rs = psmt.executeQuery();
+			psmt.setString(1,byeId);
+			psmt.setString(2,byePw);
+			psmt.executeUpdate();
 			if (rs.next()) {
 				b = true;
-				System.out.println("<< 탈퇴되었습니다 수고하셨습니다 >>");
 			} else {
 				b = false;
 			}

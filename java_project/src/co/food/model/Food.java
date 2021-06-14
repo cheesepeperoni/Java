@@ -6,7 +6,7 @@ public class Food {
 	protected String loginId; // 로그인 아이디
 	protected String loginPw; // 로그인 패스워드
 	protected String food; // 음식
-	protected String content; // 부가설명
+	protected String content; // 부가설명(간단한 recipe or stock)
 	protected String date; // 유효기간
 
 	public Food() {

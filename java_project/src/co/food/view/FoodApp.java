@@ -16,35 +16,15 @@ public class FoodApp {
 
 	public void front() {
 		int num;
-		System.out.println("[    1 .Log-in   2.Sign Up  3 Unsubscibe ]");
+		System.out.println("[    1 .Log-in   2.Sign Up    ]");
 		System.out.print("입력>>");
 		num = scanner.nextInt();
 		if (num == 1) {
 			logIn();
 		} else if (num == 2) {
 			signup();
-		} else if (num == 3) {
-			unsubscribe();
 		}
 
-	}
-	//회원탈퇴 (수정해야됨)
-	private void unsubscribe() {
-		System.out.println("▶ 회원 탈퇴 ◀");
-		System.out.print("탈퇴하실 아이디를 입력하세요>");
-		String bye = scanner.next();
-		System.out.print("탈퇴하실 비밀번호를 입력하세요>");
-		String byeP = scanner.next();	
-		while (true) {
-			if (bye.equals(userId)&&bye.equals(userPw)) {
-				System.out.println("<< 수고하셨습니다 >>");
-				foodList.unSubscribe(bye, byeP);
-			} else {
-				System.out.println("┏━━━━   틀렸습니다  ━━━━┓ ");
-				System.out.println("┗━━ 다시 확인해주십시오 ━━┛");
-				break;
-			}
-		}
 	}
 
 	public void logIn() {
@@ -65,6 +45,23 @@ public class FoodApp {
 		}
 	}
 
+	// 회원탈퇴
+	private void resign() {
+		System.out.println("▶ 회원 탈퇴 ◀");
+		System.out.print("비밀번호를 입력하세요>");
+		String byeP = scanner.next();		
+			if (byeP.equals(userPw)) {				
+				System.out.println("<< 탈퇴처리 되었습니다. 수고하셨습니다 >>");
+				foodList.deleteAccount(userId,userPw);
+				front();
+			} else {
+				System.out.println("┏━━━━   틀렸습니다  ━━━━┓ ");
+				System.out.println("┗━━ 다시 확인해주십시오 ━━┛");
+				resign();
+			
+		}
+	}
+
 	// 시작!
 	public void start() {
 		int menuNum;
@@ -72,21 +69,12 @@ public class FoodApp {
 			menuTitle();
 			menuNum = ScannerUtil.readInt("입력>");
 			switch (menuNum) {
-			case 1:
-				foodAll();
-				break;
-			case 2:
-				insert();
-				break;
-			case 3:
-				update();
-				break;
-			case 4:
-				delete();
-				break;
-			case 5:
-				foodOne();
-				break;
+			case 1:foodAll();break;
+			case 2:insert();break;
+			case 3:update();break;
+			case 4:delete();break;
+			case 5:foodOne();break;
+			case 6:resign();break;
 			}
 		} while (menuNum != 0);
 		System.out.println("《  종료되었습니다  》");
@@ -146,7 +134,7 @@ public class FoodApp {
 		String newId = scanner.next();
 		System.out.print("사용하실 비밀번호를 입력하세요>");
 		String newPw = scanner.next();
-		Food food = new Food(newId, newPw);
+		//Food food = new Food(newId, newPw);
 		foodList.signUp(newId, newPw);
 		logIn();
 
@@ -159,6 +147,7 @@ public class FoodApp {
 		System.out.println("│    3 수정하기       │");
 		System.out.println("│    4 삭제          │");
 		System.out.println("│    5 재료 조회하기   │");
+		System.out.println("│    6 회원 탈퇴      │");
 		System.out.println("│    0 종료          │");
 		System.out.println("└───────────────────┘");
 
