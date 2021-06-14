@@ -1,6 +1,6 @@
 package co.board.Util;
 
-import java.text.SimpleDateFormat ;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import co.board.model.Board;
@@ -57,17 +57,18 @@ public class ScannerUtil {
 		} while (true);
 		return result;
 	}
-	//Friend 입력
+
+	// Friend 입력
 	public static Board readBoard() {
 		System.out.print("제목, 작성자, 글내용>");
 		String result = scanner.next();
 		String[] arr = result.split(",");
-		Board board = new Board();			//혹은 new Friend(arr[0],arr[1],arr[2]);
-		board.setTitle(arr[0]);
-		board.setId(arr[1]);
-		board.setContent(arr[2]);
+		Board board = new Board(arr[0], arr[1], arr[2]); 
 		return board;
 
 	}
-
+	public static int readComment() {
+		System.out.println("1 댓글작성 2 이전메뉴로 돌아갈까요");
+		return scanner.nextInt();
+	}
 }

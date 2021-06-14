@@ -14,7 +14,8 @@ public class BoardDAO extends DAO_b implements BoardAccess {
 	static PreparedStatement psmt;
 	static ResultSet rs;
 	static Connection conn;
-
+		
+	// 등록
 	@Override
 	public void insert(Board board) {
 		connect();
@@ -27,45 +28,91 @@ public class BoardDAO extends DAO_b implements BoardAccess {
 			System.out.println(r + "건 입력");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close();
 		}
-
 	}
 
+	// 수정
 	@Override
 	public void update(Board board) {
 		connect();
 		try {
 			psmt = conn.prepareStatement("update board set b_content=? where b_id=?");
 			psmt.setString(1, board.getContent());
-			psmt.setString(2, board.getId());
+			psmt.setInt(2, board.getId());
 			int r = psmt.executeUpdate();
 			System.out.println(r + "건 수정");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close();
 		}
 
 	}
 
+	// 삭제
 	@Override
-	public void delete(String id) {
+	public void delete(int id) {
 		connect();
 		try {
 			psmt = conn.prepareStatement("delete from board where b_id=?");
-			psmt.setString(1, id);
+			psmt.setInt(1, id);
 			int r = psmt.executeUpdate();
 			System.out.println(r + "건 삭제");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close();
 		}
 
 	}
 
+	// 댓글작성
+	@Override
+	public void comment(Board board) {
+		connect();
+		try {
+			psmt = conn.prepareStatement(
+					"insert into board (b_title, b_content, b_writer, b_parentid) values (?, ?, ?, ?)");
+			psmt.setString(1, board.getTitle());
+			psmt.setString(2, board.getContent());
+			psmt.setString(3, board.getWriter());
+			psmt.setInt(4, board.getParentId());
+			int r = psmt.executeUpdate();
+			System.out.println(r + "건 입력");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+	}
+
+
+	// 로그인
+	public boolean login(String loginId, String loginPw) {
+		connect();
+		boolean b = false;
+		try {
+			psmt = conn.prepareStatement("select * from member where u_id=? and u_pass=?");
+			psmt.setString(1, loginId);
+			psmt.setString(2, loginPw);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				b = true;
+			} else {
+				b = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return b;
+	}
+
+	// 전체조회
 	@Override
 	public ArrayList<Board> selectAll() {
 		connect();
@@ -75,10 +122,11 @@ public class BoardDAO extends DAO_b implements BoardAccess {
 			rs = psmt.executeQuery();
 			while (rs.next()) {
 				Board board = new Board();
-				board.setId(rs.getString("b_id"));
+				board.setId(rs.getInt("b_id"));
 				board.setTitle(rs.getString("b_title"));
 				board.setContent(rs.getString("b_content"));
 				board.setWriter(rs.getString("b_writer"));
+				board.setParentId(rs.getInt("b_parentid"));
 				bList.add(board);
 			}
 		} catch (SQLException e) {
@@ -87,31 +135,57 @@ public class BoardDAO extends DAO_b implements BoardAccess {
 		return bList;
 	}
 
+	// 댓글 조회
+
+	public ArrayList<Board> searchCom(int id) {
+		connect();
+		ArrayList<Board> sList = new ArrayList<>();
+		try {
+			psmt = conn.prepareStatement("select * from board where b_parentid=?");
+			psmt.setInt(1, id);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				Board board = new Board();
+				board.setId(rs.getInt("b_id"));
+				board.setTitle(rs.getString("b_title"));
+				board.setContent(rs.getString("b_content"));
+				board.setWriter(rs.getString("b_writer"));
+				board.setParentId(rs.getInt("b_parentid"));
+				sList.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return sList;
+	}
+
+	// 한건조회
 	@Override
-	public Board selectOne(String id) {
+	public Board selectOne(int id) {
 		connect();
 		String sql = "select * from board where b_id=?";
 		Board b = null;
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, id);
+			psmt.setInt(1, id);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				b = new Board(); // instance 를 생성하고 변수 p에 대입
-				b.setId(rs.getString("b_id"));
+				b.setId(rs.getInt("b_id"));
 				b.setTitle(rs.getString("b_title"));
 				b.setContent(rs.getString("b_content"));
 				b.setWriter(rs.getString("b_writer"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close();
 		}
 		return b;
 
 	}
 
+	// DB연결
 	private void connect() {
 		String url = "jdbc:sqlite:C:/sqlite/db/sample.db";
 		try {
@@ -145,4 +219,29 @@ public class BoardDAO extends DAO_b implements BoardAccess {
 			}
 		}
 	}
+	
+	
+	//권한만들기
+	@Override
+	public boolean userKey(int id, String uid) {
+		connect();
+		boolean g = false;
+		try {
+			psmt = conn.prepareStatement("select * from board where b_id=? and b_writer=?");
+			psmt.setInt(1, id);
+			psmt.setString(2, uid);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				g = true;
+			} else {
+				g = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return g;
+	}
+
 }
