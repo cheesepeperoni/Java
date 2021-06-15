@@ -3,20 +3,22 @@ package co.food.model;
 public class Food {
 	// 음식점 재고관리
 	protected int number;
+	protected int stock;
 	protected String loginId; // 로그인 아이디
 	protected String loginPw; // 로그인 패스워드
 	protected String food; // 음식
-	protected String content; // 부가설명(간단한 recipe or stock)
+	protected String content; // 부가설명
 	protected String date; // 유효기간
 
 	public Food() {
 	}
-	
+
 	public Food(String loginId, String loginPw) {
 		super();
-		this.loginId=loginId;
-		this.loginPw=loginPw;
+		this.loginId = loginId;
+		this.loginPw = loginPw;
 	}
+
 	public Food(String food, String content, String date) {
 		super();
 		this.food = food;
@@ -24,6 +26,7 @@ public class Food {
 		this.date = date;
 
 	}
+
 	public Food(int number, String food, String content, String date) {
 		super();
 		this.number = number;
@@ -42,6 +45,14 @@ public class Food {
 		this.content = content;
 		this.date = date;
 
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	public int getNumber() {
@@ -92,11 +103,14 @@ public class Food {
 		this.date = date;
 	}
 
-	
+	public String work() {
+		return "│ NAME : " + loginId + " │";
+	}
+
 	@Override
 	public String toString() {
-		return "│ NUMBER :" + number + " │ FOOD :" + food
-				+ " │ CONTENT :" + content + " │ EXPIRY DATE :" + date+" │";
+		return "│ NUMBER :" + number + " │ FOOD :" + food + " │ CONTENT :" + content + 
+				" │ EXPIRY DATE :" + date + " │";
 	}
 
 }

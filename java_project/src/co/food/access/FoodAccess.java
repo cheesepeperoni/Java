@@ -5,19 +5,22 @@ import java.util.ArrayList;
 import co.food.model.Food;
 
 public interface FoodAccess {
-	// 음식 등록
+	// 재료 등록
 	public void insert(Food food);
 
-	// 음식 수정
+	// 재료 수정
 	public void update(Food food);
 
-	// 음식 삭제
+	// 재료 삭제
 	public void delete(int number);
 
-	// 음식리스트
+	// 전체조회
 	public ArrayList<Food> foodAll();
+	
+	// 직원 전체조회
+	public ArrayList<Food> workerAll();
 
-	// 음식으로 조회
+	// 재료로 조회
 	public Food foodOne(String food);
 
 	// 로그인
@@ -25,7 +28,13 @@ public interface FoodAccess {
 
 	// 직원 회원가입
 	public void signUp(String h, String hp);
-	
+
 	// 직원 회원탈퇴
 	public boolean deleteAccount(String byeId, String byePw);
+	
+	//수량 체크
+	public int check(String food);
+	
+	//수량 수정
+	public void checkUpdate(Food food);
 }

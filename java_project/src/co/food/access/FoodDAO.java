@@ -106,6 +106,7 @@ public class FoodDAO implements FoodAccess {
 
 	}
 
+	// 전체조회
 	@Override
 	public ArrayList<Food> foodAll() {
 		connect();
@@ -129,6 +130,26 @@ public class FoodDAO implements FoodAccess {
 		return fList;
 	}
 
+	@Override
+	public ArrayList<Food> workerAll() {
+		connect();
+		ArrayList<Food> wList = new ArrayList<>();
+		String sql = "select * from foodUser";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				Food work = new Food();
+				work.setLoginId(rs.getString("id"));
+				wList.add(work);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return wList;
+	}
+
+	// 재료로 조회
 	@Override
 	public Food foodOne(String food) {
 		connect();
@@ -197,7 +218,6 @@ public class FoodDAO implements FoodAccess {
 
 	}
 
-	
 	// 회원탈퇴
 	@Override
 	public boolean deleteAccount(String byeId, String byePw) {
@@ -206,8 +226,8 @@ public class FoodDAO implements FoodAccess {
 		String sql = "delete from foodUser where id =? and passwd=?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1,byeId);
-			psmt.setString(2,byePw);
+			psmt.setString(1, byeId);
+			psmt.setString(2, byePw);
 			psmt.executeUpdate();
 			if (rs.next()) {
 				b = true;
@@ -220,6 +240,59 @@ public class FoodDAO implements FoodAccess {
 			close();
 		}
 		return b;
+	}
+
+	@Override
+	public int check(String food) {
+		connect();
+		int stock = 0;
+		String sql = "select stock from food where food=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, food);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				stock = rs.getInt("stock");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return stock;
+	}
+
+	public void checkUpdate(Food food) {
+		connect();
+		String sql = "update food set stock=? where food=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, food.getStock());
+			psmt.setString(2, food.getFood());
+			psmt.executeUpdate();
+			System.out.println("<< 수정되었습니다 >>");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+	}
+	
+	// 유효기간 알림
+	public int expiryDate(int number) {
+		connect();
+		int ex = 0;
+		String sql = "select date from food where number =?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1,number);
+			psmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return ex;
+
 	}
 
 }

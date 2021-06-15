@@ -67,8 +67,8 @@ public class ScannerUtil {
 //		return food;
 //
 //	}
-	public static int readComment() {
-		System.out.println("1 댓글작성 2 이전메뉴로 돌아갈까요");
-		return scanner.nextInt();
-	}
+//	public static int readComment() {
+//		System.out.println("1 댓글작성 2 이전메뉴로 돌아갈까요");
+//		return scanner.nextInt();
+//	}
 }

@@ -1,5 +1,10 @@
 package co.food.view;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,12 +13,14 @@ import co.food.access.FoodDAO;
 import co.food.model.Food;
 
 public class FoodApp {
+	Calendar cal = Calendar.getInstance();
 	FoodDAO foodList = new FoodDAO();
 	Scanner scanner = new Scanner(System.in);
 	Scanner scan = new Scanner(System.in);
 	String userId;
 	String userPw;
 
+	// 프론트
 	public void front() {
 		int num;
 		System.out.println("[    1 .Log-in   2.Sign Up    ]");
@@ -27,6 +34,7 @@ public class FoodApp {
 
 	}
 
+	// 로그인
 	public void logIn() {
 		System.out.println("▶  로그인  ◀");
 		System.out.print("ID를 입력하세요>");
@@ -45,39 +53,101 @@ public class FoodApp {
 		}
 	}
 
+	// 로그아웃
+	private void logout() {
+		System.out.println("<<로그아웃 하시겠습니까?>>");
+		System.out.println("  1. 네 2. 아니오  ");
+		int log = ScannerUtil.readInt("입력>");
+		if (log == 1) {
+			System.out.println("<<로그아웃 되었습니다>>");
+			logIn();
+		} else if (log == 2) {
+			start();
+		}
+	}
+
 	// 회원탈퇴
 	private void resign() {
 		System.out.println("▶ 회원 탈퇴 ◀");
 		System.out.print("비밀번호를 입력하세요>");
-		String byeP = scanner.next();		
-			if (byeP.equals(userPw)) {				
-				System.out.println("<< 탈퇴처리 되었습니다. 수고하셨습니다 >>");
-				foodList.deleteAccount(userId,userPw);
-				front();
-			} else {
-				System.out.println("┏━━━━   틀렸습니다  ━━━━┓ ");
-				System.out.println("┗━━ 다시 확인해주십시오 ━━┛");
-				resign();
-			
+		String byeP = scanner.next();
+		if (byeP.equals(userPw)) {
+			System.out.println("<< 탈퇴처리 되었습니다. 수고하셨습니다 >>");
+			foodList.deleteAccount(userId, userPw);
+			front();
+		} else {
+			System.out.println("┏━━━━   틀렸습니다  ━━━━┓");
+			System.out.println("┗━━ 다시 확인해주십시오 ━━┛");
+			resign();
+
 		}
 	}
 
-	// 시작!
+	// 메뉴넘버
 	public void start() {
 		int menuNum;
 		do {
 			menuTitle();
 			menuNum = ScannerUtil.readInt("입력>");
 			switch (menuNum) {
-			case 1:foodAll();break;
-			case 2:insert();break;
-			case 3:update();break;
-			case 4:delete();break;
-			case 5:foodOne();break;
-			case 6:resign();break;
+			case 1:
+				foodAll();
+				break;
+			case 2:
+				insert();
+				break;
+			case 3:
+				update();
+				break;
+			case 4:
+				delete();
+				break;
+			case 5:
+				foodOne();
+				break;
+			case 6:
+				check();
+				break;
+			case 7:
+				worker();
+				break;
+			case 8:
+				resign();
+				break;
+			case 9:
+				logout();
+				break;
 			}
 		} while (menuNum != 0);
 		System.out.println("《  종료되었습니다  》");
+	}
+
+	// 유효기간 하루 전 알림가기
+	private void expiryDay() {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = df.parse("2019-07-04");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		cal.setTime(date);
+		System.out.println("current: " + df.format(cal.getTime()));
+
+		cal.add(Calendar.YEAR, 1);
+		cal.add(Calendar.MONTH, 2);
+		cal.add(Calendar.DATE, 3);
+		System.out.println("after: " + df.format(cal.getTime()));
+
+	}
+
+	// 직원 조회
+	private void worker() {
+		List<Food> listW = foodList.workerAll();
+		for (Food food : listW) {
+			System.out.println(food.work());
+		}
+
 	}
 
 	// 전체조회
@@ -128,15 +198,38 @@ public class FoodApp {
 		System.out.println(foodList.foodOne(ing));
 	}
 
+	// 회원가입
 	private void signup() {
 		System.out.println("[ 직원 전용 회원가입 ]");
 		System.out.print("사용하실 ID를 입력하세요>");
 		String newId = scanner.next();
 		System.out.print("사용하실 비밀번호를 입력하세요>");
 		String newPw = scanner.next();
-		//Food food = new Food(newId, newPw);
 		foodList.signUp(newId, newPw);
 		logIn();
+
+	}
+
+	// 수량 체크
+	private void check() {
+		int num;
+		System.out.println("│ 1. 수량 체크  2.수량 수정 │");
+		num = scanner.nextInt();
+		if (num == 1) {
+			System.out.print("수량 체크할 재료를 입력하세요>");
+			String check = scanner.next();
+			FoodDAO dao = new FoodDAO();
+			System.out.printf("│ 현재 수량 : %d │", dao.check(check));
+			System.out.println(); // 메뉴판 찌그러짐 방지
+		} else if (num == 2) {
+			Food food = new Food();
+			System.out.print("수량 수정할 재료를 입력하세요>");
+			food.setFood(scanner.next());
+			System.out.print("수정할 수량을 입력하세요>");
+			food.setStock(scanner.nextInt());
+			foodList.checkUpdate(food);
+			System.out.println("변경되었습니다");
+		}
 
 	}
 
@@ -147,7 +240,10 @@ public class FoodApp {
 		System.out.println("│    3 수정하기       │");
 		System.out.println("│    4 삭제          │");
 		System.out.println("│    5 재료 조회하기   │");
-		System.out.println("│    6 회원 탈퇴      │");
+		System.out.println("│    6 수량관리       │");
+		System.out.println("│    7 전 직원 리스트  │");
+		System.out.println("│    8 회원 탈퇴      │");
+		System.out.println("│    9 로그아웃       │");
 		System.out.println("│    0 종료          │");
 		System.out.println("└───────────────────┘");
 
