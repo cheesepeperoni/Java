@@ -1,10 +1,6 @@
 package co.food.view;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -122,25 +118,6 @@ public class FoodApp {
 		System.out.println("《  종료되었습니다  》");
 	}
 
-	// 유효기간 하루 전 알림가기
-	private void expiryDay() {
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = df.parse("2019-07-04");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		cal.setTime(date);
-		System.out.println("current: " + df.format(cal.getTime()));
-
-		cal.add(Calendar.YEAR, 1);
-		cal.add(Calendar.MONTH, 2);
-		cal.add(Calendar.DATE, 3);
-		System.out.println("after: " + df.format(cal.getTime()));
-
-	}
-
 	// 직원 조회
 	private void worker() {
 		List<Food> listW = foodList.workerAll();
@@ -197,7 +174,8 @@ public class FoodApp {
 		String ing = scanner.next();
 		System.out.println(foodList.foodOne(ing));
 	}
-
+ 
+	
 	// 회원가입
 	private void signup() {
 		System.out.println("[ 직원 전용 회원가입 ]");
@@ -220,6 +198,7 @@ public class FoodApp {
 			String check = scanner.next();
 			FoodDAO dao = new FoodDAO();
 			System.out.printf("│ 현재 수량 : %d │", dao.check(check));
+			System.out.println();
 			System.out.println(); // 메뉴판 찌그러짐 방지
 		} else if (num == 2) {
 			Food food = new Food();
@@ -230,7 +209,6 @@ public class FoodApp {
 			foodList.checkUpdate(food);
 			System.out.println("변경되었습니다");
 		}
-
 	}
 
 	public void menuTitle() {

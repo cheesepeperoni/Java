@@ -130,6 +130,7 @@ public class FoodDAO implements FoodAccess {
 		return fList;
 	}
 
+	// 직원조회
 	@Override
 	public ArrayList<Food> workerAll() {
 		connect();
@@ -242,6 +243,7 @@ public class FoodDAO implements FoodAccess {
 		return b;
 	}
 
+	// 스톡 수량 체크
 	@Override
 	public int check(String food) {
 		connect();
@@ -260,6 +262,7 @@ public class FoodDAO implements FoodAccess {
 		return stock;
 	}
 
+	// 스톡 수량 수정
 	public void checkUpdate(Food food) {
 		connect();
 		String sql = "update food set stock=? where food=?";
@@ -274,24 +277,6 @@ public class FoodDAO implements FoodAccess {
 		} finally {
 			close();
 		}
-
-	}
-	
-	// 유효기간 알림
-	public int expiryDate(int number) {
-		connect();
-		int ex = 0;
-		String sql = "select date from food where number =?";
-		try {
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1,number);
-			psmt.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		return ex;
 
 	}
 
