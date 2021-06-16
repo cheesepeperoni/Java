@@ -7,8 +7,7 @@ public class AppMain {
 		FoodApp app = new FoodApp();
 		app.front();
 
-		//new FoodGuiApp();
-	
+		//new FoodGuiApp();	
 	}
 
 }

@@ -1,10 +1,6 @@
 package co.food.view;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,19 +15,23 @@ public class FoodApp {
 	Scanner scan = new Scanner(System.in);
 	String userId;
 	String userPw;
+	String alrUser;
 
 	// 프론트
 	public void front() {
 		int num;
-		System.out.println("[    1 .Log-in   2.Sign Up    ]");
+		System.out.println("┌─────────────────────────────┐");
+		System.out.println("│    1 .Log-in   2.Sign Up    │");
+		System.out.println("└─────────────────────────────┘");
 		System.out.print("입력>>");
 		num = scanner.nextInt();
 		if (num == 1) {
 			logIn();
 		} else if (num == 2) {
 			signup();
+			front();
 		}
-
+		System.out.println("시스템종료");
 	}
 
 	// 로그인
@@ -122,25 +122,6 @@ public class FoodApp {
 		System.out.println("《  종료되었습니다  》");
 	}
 
-	// 유효기간 하루 전 알림가기
-	private void expiryDay() {
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = df.parse("2019-07-04");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		cal.setTime(date);
-		System.out.println("current: " + df.format(cal.getTime()));
-
-		cal.add(Calendar.YEAR, 1);
-		cal.add(Calendar.MONTH, 2);
-		cal.add(Calendar.DATE, 3);
-		System.out.println("after: " + df.format(cal.getTime()));
-
-	}
-
 	// 직원 조회
 	private void worker() {
 		List<Food> listW = foodList.workerAll();
@@ -184,11 +165,15 @@ public class FoodApp {
 		foodList.update(food);
 	}
 
-	// 삭제
+	// 삭제(사장인 피비만)
 	private void delete() {
 		System.out.print("삭제할 번호를 입력하세요>");
 		int number = scanner.nextInt();
-		foodList.delete(number);
+		if (userId.equals("피비")) {
+			foodList.delete(number);
+		} else {
+			System.out.println(" << 권한이 없습니다 >> ");
+		}
 	}
 
 	// 재료로 조회
@@ -203,24 +188,40 @@ public class FoodApp {
 		System.out.println("[ 직원 전용 회원가입 ]");
 		System.out.print("사용하실 ID를 입력하세요>");
 		String newId = scanner.next();
+		List<Food> listW = foodList.workerAll();
+		for (Food food : listW) {
+			if (food.name().equals(newId)) {
+				System.out.println("<< 이미 존재하는 아이디입니다 >>");
+				return;
+			}
+		}
 		System.out.print("사용하실 비밀번호를 입력하세요>");
 		String newPw = scanner.next();
 		foodList.signUp(newId, newPw);
 		logIn();
-
 	}
 
 	// 수량 체크
 	private void check() {
 		int num;
+		int n;
 		System.out.println("│ 1. 수량 체크  2.수량 수정 │");
+		System.out.print("입력>");
 		num = scanner.nextInt();
 		if (num == 1) {
 			System.out.print("수량 체크할 재료를 입력하세요>");
 			String check = scanner.next();
 			FoodDAO dao = new FoodDAO();
 			System.out.printf("│ 현재 수량 : %d │", dao.check(check));
-			System.out.println(); // 메뉴판 찌그러짐 방지
+			System.out.println();
+			System.out.println("│ 1 메뉴로 돌아가기 2 이전으로 돌아가기 │");
+			System.out.print("입력>");
+			n = scanner.nextInt();
+			if (n == 1) {
+				start();
+			} else if (n == 2) {
+				check();
+			}
 		} else if (num == 2) {
 			Food food = new Food();
 			System.out.print("수량 수정할 재료를 입력하세요>");
@@ -228,7 +229,14 @@ public class FoodApp {
 			System.out.print("수정할 수량을 입력하세요>");
 			food.setStock(scanner.nextInt());
 			foodList.checkUpdate(food);
-			System.out.println("변경되었습니다");
+			System.out.println("│ 1 메뉴로 돌아가기   2 이전으로 돌아가기 │");
+			System.out.print("입력>");
+			n = scanner.nextInt();
+			if (n == 1) {
+				start();
+			} else if (n == 2) {
+				check();
+			}
 		}
 
 	}
@@ -238,7 +246,7 @@ public class FoodApp {
 		System.out.println("│    1 재료 전체조회   │");
 		System.out.println("│    2 등록하기       │");
 		System.out.println("│    3 수정하기       │");
-		System.out.println("│    4 삭제          │");
+		System.out.println("│    4 재료 삭제      │");
 		System.out.println("│    5 재료 조회하기   │");
 		System.out.println("│    6 수량관리       │");
 		System.out.println("│    7 전 직원 리스트  │");

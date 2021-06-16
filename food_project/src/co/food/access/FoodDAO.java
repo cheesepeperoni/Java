@@ -105,7 +105,6 @@ public class FoodDAO implements FoodAccess {
 		}
 
 	}
-
 	// 전체조회
 	@Override
 	public ArrayList<Food> foodAll() {
@@ -129,7 +128,38 @@ public class FoodDAO implements FoodAccess {
 
 		return fList;
 	}
+//	public ArrayList<Food> workerId(String id){
+//		connect();
+//		ArrayList<Food> list = new ArrayList<>();
+//		String sql = "select id=? from foodUser";
+//		try {
+//			psmt =conn.prepareStatement(sql);
+//			psmt.setString(1, id);
+//			while(rs.next()) {
+//				Food wId = new Food();
+//				wId.setLoginId(rs.getString("id"));
+//				list.add(wId);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+	public void id(Food food) {
+		connect();
+		String sql = "select id=? from foodUser";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, food.getFood());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
 
+	}
+	
+	// 전 직원 조회
 	@Override
 	public ArrayList<Food> workerAll() {
 		connect();
@@ -141,7 +171,8 @@ public class FoodDAO implements FoodAccess {
 			while (rs.next()) {
 				Food work = new Food();
 				work.setLoginId(rs.getString("id"));
-				wList.add(work);
+				wList.add(work); 
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -199,6 +230,7 @@ public class FoodDAO implements FoodAccess {
 		return log;
 	}
 
+	
 	// 직원 회원가입
 	@Override
 	public void signUp(String h, String hp) {
@@ -241,7 +273,7 @@ public class FoodDAO implements FoodAccess {
 		}
 		return b;
 	}
-
+	//수량 체크
 	@Override
 	public int check(String food) {
 		connect();
@@ -259,7 +291,7 @@ public class FoodDAO implements FoodAccess {
 		}
 		return stock;
 	}
-
+	//수량 수정
 	public void checkUpdate(Food food) {
 		connect();
 		String sql = "update food set stock=? where food=?";
@@ -274,24 +306,6 @@ public class FoodDAO implements FoodAccess {
 		} finally {
 			close();
 		}
-
-	}
-	
-	// 유효기간 알림
-	public int expiryDate(int number) {
-		connect();
-		int ex = 0;
-		String sql = "select date from food where number =?";
-		try {
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1,number);
-			psmt.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		return ex;
 
 	}
 

@@ -19,7 +19,7 @@ public interface FoodAccess {
 	
 	// 직원 전체조회
 	public ArrayList<Food> workerAll();
-
+	
 	// 재료로 조회
 	public Food foodOne(String food);
 
@@ -37,4 +37,5 @@ public interface FoodAccess {
 	
 	//수량 수정
 	public void checkUpdate(Food food);
+	
 }

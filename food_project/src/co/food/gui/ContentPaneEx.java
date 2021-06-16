@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 public class ContentPaneEx extends JFrame{
 	 public ContentPaneEx() {
-	        setTitle("ContentPane과 JFrame 예제"); //프레임 타이틀
+	        setTitle("＊ 。BLUE BIRD 。＊"); //프레임 타이틀
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        
 	        Container contentPane = getContentPane(); // 컨텐트팬 알아내기
