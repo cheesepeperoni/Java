@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 public class FlowLayoutEx extends JFrame{
 	public FlowLayoutEx() {
-        setTitle("FlowLayout 예제");
+        setTitle("＊ 。BLUE BIRD 。＊");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container contentPane = getContentPane();
         

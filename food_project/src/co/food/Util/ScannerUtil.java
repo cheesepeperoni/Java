@@ -40,5 +40,4 @@ public class ScannerUtil {
 		return result;
 	}
 
-
 }

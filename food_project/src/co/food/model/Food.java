@@ -106,7 +106,9 @@ public class Food {
 	public String work() {
 		return "│ NAME : " + loginId + " │";
 	}
-
+	public String name() {
+		return loginId;
+	}
 	@Override
 	public String toString() {
 		return "│ NUMBER :" + number + " │ FOOD :" + food + " │ CONTENT :" + content + 

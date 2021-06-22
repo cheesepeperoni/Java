@@ -105,7 +105,6 @@ public class FoodDAO implements FoodAccess {
 		}
 
 	}
-
 	// 전체조회
 	@Override
 	public ArrayList<Food> foodAll() {
@@ -129,8 +128,42 @@ public class FoodDAO implements FoodAccess {
 
 		return fList;
 	}
+//	public ArrayList<Food> workerId(String id){
+//		connect();
+//		ArrayList<Food> list = new ArrayList<>();
+//		String sql = "select id=? from foodUser";
+//		try {
+//			psmt =conn.prepareStatement(sql);
+//			psmt.setString(1, id);
+//			while(rs.next()) {
+//				Food wId = new Food();
+//				wId.setLoginId(rs.getString("id"));
+//				list.add(wId);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+	public void id(Food food) {
+		connect();
+		String sql = "select id=? from foodUser";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, food.getFood());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
 
 	// 직원조회
+
+	}
+	
+	// 전 직원 조회
+
 	@Override
 	public ArrayList<Food> workerAll() {
 		connect();
@@ -142,7 +175,8 @@ public class FoodDAO implements FoodAccess {
 			while (rs.next()) {
 				Food work = new Food();
 				work.setLoginId(rs.getString("id"));
-				wList.add(work);
+				wList.add(work); 
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -200,6 +234,7 @@ public class FoodDAO implements FoodAccess {
 		return log;
 	}
 
+	
 	// 직원 회원가입
 	@Override
 	public void signUp(String h, String hp) {
@@ -243,7 +278,11 @@ public class FoodDAO implements FoodAccess {
 		return b;
 	}
 
+
 	// 스톡 수량 체크
+
+	//수량 체크
+
 	@Override
 	public int check(String food) {
 		connect();
@@ -261,6 +300,7 @@ public class FoodDAO implements FoodAccess {
 		}
 		return stock;
 	}
+
 
 	// 스톡 수량 수정
 	public void checkUpdate(Food food) {
